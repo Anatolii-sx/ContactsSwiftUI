@@ -12,7 +12,7 @@ struct PersonDescription: View {
     
     var body: some View {
         VStack {
-            List {
+            Form {
                 HStack {
                     Spacer()
                     Image(systemName: person.photo)
@@ -23,9 +23,17 @@ struct PersonDescription: View {
                 }
                 .padding()
                 
-                InfoView(phone: person.phone, email: person.email)
+                InfoLineView(
+                    systemPicture: "phone",
+                    colorOfPicture: .blue,
+                    text: person.phone
+                )
+                InfoLineView(
+                    systemPicture: "tray",
+                    colorOfPicture: .blue,
+                    text: person.email
+                )
             }
-            .listStyle(.grouped)
             .navigationTitle(person.fullName)
         }
     }
@@ -33,14 +41,6 @@ struct PersonDescription: View {
 
 struct PersonDescription_Previews: PreviewProvider {
     static var previews: some View {
-        PersonDescription(
-            person: Person(
-                name: "Gosha",
-                surname: "Petrov",
-                phone: "8(999)356-56-56",
-                email: "gosha@bosha.ru",
-                photo: "person.fill"
-            )
-        )
+        PersonDescription(person: Person.getPersonsList().first!)
     }
 }
